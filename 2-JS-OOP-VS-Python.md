@@ -75,6 +75,9 @@ Notes
 Python
 ```python
 class Animal:
+    def __init__(self, name):
+      self.name = name
+
     def speak(self):
         return f"{self.name} makes a sound"
 
@@ -85,6 +88,10 @@ class Animal:
 JavaScript
 ```js
 class Animal {
+  constructor(name) {
+    this.name = name; // instance field
+  }
+
   speak() {
     return `${this.name} makes a sound`;
   }
@@ -128,6 +135,9 @@ Notes
 Python
 ```python
 class LoudDog(Dog):
+    def __init__(self, name, breed):
+        super().__init__(name, breed)
+    
     def speak(self):
         base = super().speak()
         return base.upper()
@@ -135,6 +145,9 @@ class LoudDog(Dog):
 JavaScript
 ```js
 class LoudDog extends Dog {
+  constructor(name, breed) {
+    super(name, breed);        // must be first before using `this`
+  }
   speak() {
     const base = super.speak();
     return base.toUpperCase();
@@ -181,9 +194,27 @@ class ButtonCounter {
 -----------
 - Python: name-mangling via `__private`.
 - Modern JS: `#privateField` and `#privateMethod` are truly private to the class body.
+Python
+```python
+class BankAccount:
+    def __init__(self, balance=0):
+        self.__balance = balance  # name-mangled (not truly private)
+    
+    def deposit(self, amount):
+        self.__balance += amount
+    
+    @property
+    def balance(self):
+        return self.__balance
+```
+
+JavaScript
 ```js
 class BankAccount {
   #balance = 0;
+  constructor(balance = 0) {
+    this.#balance = balance;
+  }
   deposit(amount) { this.#balance += amount; }
   get balance() { return this.#balance; }
 }

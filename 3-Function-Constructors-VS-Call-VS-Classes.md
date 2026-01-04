@@ -1,5 +1,6 @@
 Function Calls vs Function Constructors (Prototype Basics)
 ==========================================================
+For more details check [Function() constructor MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/Function)
 
 Audience: Students who already know Python OOP but should see how pre-ES6 JavaScript used constructors and prototypes, before jumping back to ES6 classes.
 

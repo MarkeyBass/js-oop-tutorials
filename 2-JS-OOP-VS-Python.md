@@ -135,9 +135,11 @@ Notes
 Python
 ```python
 class LoudDog(Dog):
-    def __init__(self, name, breed):
-        super().__init__(name, breed)
-    
+    # No __init__ needed: Python automatically inherits parent's __init__
+    # if the subclass doesn't define one. Since LoudDog doesn't add or modify
+    # instance attributes, we can omit it entirely.
+    # def __init__(self, name, breed):
+    #   super().__init__(name, breed)
     def speak(self):
         base = super().speak()
         return base.upper()
@@ -145,15 +147,24 @@ class LoudDog(Dog):
 JavaScript
 ```js
 class LoudDog extends Dog {
-  constructor(name, breed) {
-    super(name, breed);        // must be first before using `this`
-  }
+  // No constructor needed: JS automatically creates one that calls super(...)
+  // with all arguments if the subclass doesn't define a constructor.
+  // Since LoudDog doesn't add or modify instance properties, we can omit it.
+  // constructor(name, breed) {
+  //   super(name, breed);        // must be first before using `this`
+  // }
   speak() {
     const base = super.speak();
     return base.toUpperCase();
   }
 }
 ```
+Notes
+- **Best practice**: Only define a constructor/`__init__` in a subclass if you need to:
+  - Add new instance attributes/properties
+  - Modify initialization logic or validate parameters
+  - Transform arguments before passing to parent
+- If the subclass only overrides methods without changing initialization, omit the constructor entirely for cleaner, more maintainable code.
 
 7) Method overriding
 --------------------
